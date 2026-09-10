@@ -43,7 +43,8 @@
             {
                 throw new ArgumentException("Por favor, informe um número válido de passageiro(s).");
             }
-
+            /* Regra 8: "Uma rota não pode ser feita com um número superior à capacidade máxima de pessoas". 
+               P.S: Para que a capacidade máxima seja atingida, é NECESSÁRIO embarcar passageiros, então implementamos essa regra nesse método. */
             if (QuantPassageiros + passageiroEntrando > CapacidadeMax)
             {
                 throw new InvalidOperationException("A capacidade máxima foi atingida, por favor aguarde a próxima viagem.");
@@ -72,6 +73,11 @@
                 return;
             }
 
+            /* Regra 5: "A rota deve conter apenas os andares que ainda não foram visitados;"
+               Deixa aberto à interpretação se o andar selecionado NUNCA deve ser adicionado novamente ou se ele só não deve ser adicionado se já estiver na lista.
+               Nesse projeto, seguimos com a lógica do elevador real: um andar PODE ser solicitado novamente depois de já ter sido visitado, pois ao sair da Rota, 
+               ele já não seria um andar "repetido". 
+               P.S: Porém, se fôssemos limitar um andar para nunca aparecer novamente, criaríamos uma nova lista para guardar os andares que já foram visitados.*/
             if (Rota.Contains(andarDesejado))
             {
                 // Recusa o andar já inserido na Rota.
