@@ -4,6 +4,8 @@ using System.Text;
 
 namespace Elevador
 {
+    // Auth: March.
+
     // 0. CLASSE DA FÁBRICA DO ELEVADOR.
     // P.S: Definida como
     public class ElevadorFactory

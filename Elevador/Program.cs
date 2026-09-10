@@ -2,6 +2,8 @@
 {
     internal class Program
     {
+        // Auth: March.
+
         // 0. CLASSE PRINCIPAL.
         static void Main(string[] args)
         {

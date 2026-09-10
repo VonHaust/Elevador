@@ -1,5 +1,7 @@
 ﻿namespace Elevador
 {
+    // Auth: March.
+
     // 0. CLASSE DA CONSTRUÇÃO DO ELEVADOR.
     public class ElevadorModel
     {
@@ -26,7 +28,7 @@
                 throw new ArgumentException("A capacidade máxima do elevador deve ser maior que zero.");
             }
 
-            StatusElevador = "Parado"; 
+            StatusElevador = "Parado";
             AndarAtual = 0;
             PortasAbertas = true;
             Rota = new List<int>();
@@ -103,7 +105,7 @@
         {
             // 5.1 RESTRIÇÃO:
             // Se não houver andares inseridos na rota:
-            if (Rota.Count == 0) 
+            if (Rota.Count == 0)
             {
                 throw new InvalidOperationException("Por favor, informe o andar de destino.");
             }
