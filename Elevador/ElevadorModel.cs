@@ -257,7 +257,6 @@
         public void DesembarcarPassageiros(int passageiroSaindo)
         {
             // 7.1 RESTRIÇÕES DE SEGURANÇA:
-            // P.S: passageiroSaindo 
             if (PortasAbertas != true || StatusElevador != "Parado")
             {
                 throw new InvalidOperationException("Aguarde o elevador parar e as portas abrirem para realizar o desembarque.");
@@ -291,6 +290,7 @@
                     // Adiciona o andar do térreo como o próximo destino.
                     Rota.Add(0);
                 }
+                // Se sim, reinicia a memória:
                 else
                 {
                     MemoriaDoStatus = "Point Zero";
