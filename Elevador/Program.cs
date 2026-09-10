@@ -23,21 +23,31 @@
                 // 1.2. Outro passageiro, lá em cima, chamou o elevador para poder embarcar:
                 Serie1.SelecionarAndar(5);
 
-                // 1.3. O elevador sobe ATÉ chegar no andar 5:
+                // 1.3. O elevador desce até o -3º, o primeiro passageiro desembarca e o elevador depois sobe
+                // até 5º andar:
+                Serie1.MovimentarElevador();
+                Serie1.DesembarcarPassageiros(1);
                 Serie1.MovimentarElevador();
 
-                // 1.4. O elevador chegou no andar 5. Os novos passageiros entraram e selecionaram novos andares:
+                // 1.4. O elevador chegou no andar 5º. Os novos passageiros entraram e selecionaram novos andares:
                 Serie1.EmbarcarPassageiros(2);
                 Serie1.SelecionarAndar(-2);
                 Serie1.SelecionarAndar(12);
 
                 /* 1.5. Aplicamos um "while" para fazer com que o elevador complete todas as viagens de uma vez:
-                   P.S: Poderíamos implementar uma "execução automática" no próprio método, porém isso impediria de fazer
-                   simulações onde um passageiro embarca e adiciona um andar à Rota DURANTE o pecorrimento da lista. */
+                   P.S: Poderíamos implementar um" lá no próprio método, porém isso atrapalharia 
+                   na hora de fazer simulações onde um passageiro embarca/desembarca DURANTE o pecorrimento da lista. */
                 while (Serie1.Rota.Count > 0)
                 {
                     Serie1.MovimentarElevador();
                 }
+
+                /* 1.6. Os últimos passageiros desembarcam do elevador e ele retorna ao térreo:
+                   P.S: Para demonstrar o uso do "while", simulamos que ninguém desembarcou no 12º andar (a criança 
+                   apertou..) e todos saíram no -2º. Ademais, se adicionarmos essa linha dentro do "while", ele exibirá 
+                   uma mensagem de erro no final ao tentar subtrair um passageiro do elevador que não tem mais ninguém 
+                   dentro. */
+                Serie1.DesembarcarPassageiros(2); 
             }
             // 2. CASO ALGUM CENÁRIO DE EXCEÇÃO SEJA ACIONADO *OU* CASO OCORRA ALGUM ERRO INESPERADO:
             catch (Exception ex)

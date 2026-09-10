@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Elevador
+﻿namespace Elevador
 {
     // 0. CLASSE DA CONSTRUÇÃO DO ELEVADOR.
     internal class ElevadorModel
@@ -35,7 +31,7 @@ namespace Elevador
 
         // 3. EMBARCAR PASSAGEIROS:
         // Realiza a primeira função de um elevador: embarcar. Recebe a quantidade de passageiros que está embarcando.
-        public void EmbarcarPassageiros(int passageiro)
+        public void EmbarcarPassageiros(int passageiroEntrando)
         {
             // 3.1 RESTRIÇÕES:
             if (PortasAbertas != true || StatusElevador != "Parado")
@@ -43,19 +39,19 @@ namespace Elevador
                 throw new InvalidOperationException("Aguarde o elevador parar e as portas abrirem para realizar o embarque.");
             }
 
-            if (passageiro < 0)
+            if (passageiroEntrando < 0)
             {
-                throw new ArgumentOutOfRangeException("Por favor, informe um número válido de passageiro(s).");
+                throw new ArgumentException("Por favor, informe um número válido de passageiro(s).");
             }
 
-            if (QuantPassageiros + passageiro > CapacidadeMax)
+            if (QuantPassageiros + passageiroEntrando > CapacidadeMax)
             {
                 throw new InvalidOperationException("A capacidade máxima foi atingida, por favor aguarde a próxima viagem.");
             }
             // 3.2 FUNÇÃO:
             else
             {
-                QuantPassageiros += passageiro;
+                QuantPassageiros += passageiroEntrando;
                 Console.WriteLine("\nAtualmente, o elevador conta com " + QuantPassageiros + " passageiro(s).\n");
             }
         }
@@ -232,35 +228,61 @@ namespace Elevador
                 StatusElevador = "Parado";
                 PortasAbertas = true;
 
-                Console.WriteLine("Chegamos ao andar " + AndarAtual + ". Por favor, desembarque(m) com segurança.");
-
-                // 6.4 TERCEIRA FUNÇÃO:
-                // Caso essa tenha sido a última viagem do elevador:
-                if (Rota.Count == 0)
-                {
-                    Console.WriteLine("\nRota concluída com sucesso.");
-                    Console.WriteLine("¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨");
-                    // Se o elevador não tiver encerrado a rota no térreo:
-                    if (AndarAtual != 0)
-                    {
-                        Console.WriteLine("Retornando automaticamente ao térreo.");
-                        // Adiciona o andar do térreo como o próximo destino.
-                        Rota.Add(0);
-                    }
-                    // Caso contrário:
-                    else
-                    {
-                        MemoriaDoStatus = "Point Zero";
-                        Console.WriteLine("\nViagem finalizada. Aguardando no térreo.");
-                        Console.WriteLine("========================================");
-                    }
-                }
+                Console.WriteLine("Chegamos ao andar " + AndarAtual + ". As portas estão abertas.");
             }
             else
             {
                 // P.S: Trava extra de segurança:
                 // Se chegou aqui e a variável andarValido continua nula, significa que ocorreu algum erro de lógica.
                 throw new InvalidOperationException("Erro: não existe um andar válido na direção atual.");
+            }
+        }
+
+        // 7. DESEMBARCAR PASSAGEIROS:
+        // Realiza a função de desembarcar passageiros e avaliar se a rota foi concluída. Recebe a quantidade de passageiros que estão saindo.
+        public void DesembarcarPassageiros(int passageiroSaindo)
+        {
+            // 7.1 RESTRIÇÕES DE SEGURANÇA:
+            // P.S: passageiroSaindo 
+            if (PortasAbertas != true || StatusElevador != "Parado")
+            {
+                throw new InvalidOperationException("Aguarde o elevador parar e as portas abrirem para realizar o desembarque.");
+            }
+
+            if (passageiroSaindo < 0)
+            {
+                throw new ArgumentException("Por favor, informe um número válido de passageiros.");
+            }
+
+            if (passageiroSaindo > QuantPassageiros)
+            {
+                throw new InvalidOperationException("Não é possível desembarcar mais passageiros do que os presentes no elevador.");
+            }
+
+            QuantPassageiros -= passageiroSaindo;
+            Console.WriteLine(passageiroSaindo + " passageiro(s) desembarcaram. O elevador agora conta com " + QuantPassageiros + " passageiro(s).");
+
+            // 7.2 FUNÇÃO DE DESEMBARQUE:
+
+            // 7.3 VERIFICAÇÃO DE CONCLUSÃO DE ROTA
+            if (Rota.Count == 0)
+            {
+                Console.WriteLine("\nRota concluída com sucesso.");
+                Console.WriteLine("¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨");
+
+                // Se o elevador não tiver encerrado a rota no térreo:
+                if (AndarAtual != 0)
+                {
+                    Console.WriteLine("Retornando automaticamente ao térreo.");
+                    // Adiciona o andar do térreo como o próximo destino.
+                    Rota.Add(0);
+                }
+                else
+                {
+                    MemoriaDoStatus = "Point Zero";
+                    Console.WriteLine("\nViagem finalizada. Aguardando no térreo.");
+                    Console.WriteLine("========================================");
+                }
             }
         }
     }
