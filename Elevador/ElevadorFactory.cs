@@ -5,7 +5,8 @@ using System.Text;
 namespace Elevador
 {
     // 0. CLASSE DA FÁBRICA DO ELEVADOR.
-    internal class ElevadorFactory
+    // P.S: Definida como
+    public class ElevadorFactory
     {
         // 1. CONSTRUTOR SEM PARÂMETROS:
         public ElevadorFactory() { }

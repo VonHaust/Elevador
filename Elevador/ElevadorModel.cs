@@ -1,7 +1,7 @@
 ﻿namespace Elevador
 {
     // 0. CLASSE DA CONSTRUÇÃO DO ELEVADOR.
-    internal class ElevadorModel
+    public class ElevadorModel
     {
         // 1. DECLARAÇÃO DE VARIÁVEIS:
         // Todas as variáveis são encapsuladas para garantir que as outras classes possam somente visualizar os valores, sem alterar.
@@ -20,6 +20,12 @@
         // Define os valores iniciais das variáveis (quando o elevador está parado) e recebe a capacidade máxima de passageiros.
         public ElevadorModel(int limitePassageiros)
         {
+            // Adicionamos uma exceção para se a capacidade máxima do elevador for informada como "0" ou menos:
+            if (limitePassageiros <= 0)
+            {
+                throw new ArgumentException("A capacidade máxima do elevador deve ser maior que zero.");
+            }
+
             StatusElevador = "Parado"; 
             AndarAtual = 0;
             PortasAbertas = true;
